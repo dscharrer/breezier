@@ -7,7 +7,7 @@ set(breezecommon_LIB_SRCS
     breezeboxshadowrenderer.cpp
 )
 
-add_library(breezecommon5 ${breezecommon_LIB_SRCS})
+add_library(breezecommon5 OBJECT ${breezecommon_LIB_SRCS})
 
 generate_export_header(breezecommon5
     BASE_NAME breezecommon

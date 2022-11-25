@@ -1,4 +1,4 @@
-File=breezesettingsdata.kcfg
+File=breeziersettingsdata.kcfg
 ClassName=InternalSettings
 NameSpace=Breeze
 Singleton=false
