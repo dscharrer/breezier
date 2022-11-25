@@ -218,10 +218,6 @@ void Decoration::init()
     m_shadowAnimation->setStartValue(0.0);
     m_shadowAnimation->setEndValue(1.0);
     m_shadowAnimation->setEasingCurve(QEasingCurve::OutCubic);
-    connect(m_shadowAnimation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
-        m_shadowOpacity = value.toReal();
-        updateShadow();
-    });
 
     // use DBus connection to update on breeze configuration change
     auto dbus = QDBusConnection::sessionBus();
@@ -294,7 +290,6 @@ void Decoration::init()
     connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
     createButtons();
-    updateShadow();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return true;
 #endif
@@ -325,8 +320,6 @@ void Decoration::updateAnimationState()
             m_shadowAnimation->start();
         }
 
-    } else {
-        updateShadow();
     }
 
     if (m_animation->duration() > 0) {
@@ -415,9 +408,6 @@ void Decoration::reconfigure()
 
     // borders
     recalculateBorders();
-
-    // shadow
-    updateShadow();
 }
 
 //________________________________________________________________
@@ -573,15 +563,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
             painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
         }
 
-        if (s->isAlphaChannelSupported()) {
-            if (hasNoBorders()) {
-                painter->drawRoundedRect(rect(), 0, 0);
-            } else {
-                painter->drawRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
-            }
-        } else {
-            painter->drawRect(rect());
-        }
+        painter->drawRect(rect());
 
         painter->restore();
     }
@@ -590,11 +572,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         paintTitleBar(painter, repaintRegion);
     }
 
-    if (hasBorders() && !s->isAlphaChannelSupported()) {
+    if (hasBorders()) {
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing, false);
         painter->setBrush(Qt::NoBrush);
-        painter->setPen(c->isActive() ? c->color(ColorGroup::Active, ColorRole::TitleBar) : c->color(ColorGroup::Inactive, ColorRole::Foreground));
+        painter->setPen(c->isActive() ? c->palette().color( QPalette::Highlight ) : c->color( ColorGroup::Active, ColorRole::TitleBar ));
 
         painter->drawRect(rect().adjusted(0, 0, -1, -1));
         painter->restore();
@@ -668,39 +650,11 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     }
 
     auto s = settings();
-    if (isMaximized() || !s->isAlphaChannelSupported()) {
-        painter->setBrush(backBrush);
-        painter->drawRect(backRect);
+    painter->setBrush(backBrush);
+    painter->drawRect(backRect);
 
-        painter->setBrush(frontBrush);
-        painter->drawRect(frontRect);
-
-    } else if (c->isShaded()) {
-        painter->setBrush(backBrush);
-        painter->drawRoundedRect(backRect, m_scaledCornerRadius, m_scaledCornerRadius);
-
-        painter->setBrush(frontBrush);
-        painter->drawRoundedRect(frontRect, m_scaledCornerRadius, m_scaledCornerRadius);
-
-    } else {
-        painter->setClipRect(backRect, Qt::IntersectClip);
-
-        auto drawThe = [=](const QRect &r) {
-            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
-            painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
-                                                isTopEdge() ? -m_scaledCornerRadius : 0,
-                                                isRightEdge() ? m_scaledCornerRadius : 0,
-                                                m_scaledCornerRadius),
-                                     m_scaledCornerRadius,
-                                     m_scaledCornerRadius);
-        };
-
-        painter->setBrush(backBrush);
-        drawThe(backRect);
-
-        painter->setBrush(frontBrush);
-        drawThe(frontRect);
-    }
+    painter->setBrush(frontBrush);
+    painter->drawRect(frontRect);
 
     painter->restore();
 
