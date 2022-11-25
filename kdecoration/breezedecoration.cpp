@@ -563,8 +563,8 @@ namespace Breeze
             painter->setRenderHint(QPainter::Antialiasing, false);
             painter->setBrush( Qt::NoBrush );
             painter->setPen( c->isActive() ?
-                c->color( ColorGroup::Active, ColorRole::TitleBar ):
-                c->color( ColorGroup::Inactive, ColorRole::Foreground ) );
+                c->palette().color( QPalette::Highlight ):
+                c->color( ColorGroup::Active, ColorRole::TitleBar ) );
 
             painter->drawRect( rect().adjusted( 0, 0, -1, -1 ) );
             painter->restore();
