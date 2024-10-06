@@ -9,7 +9,7 @@
 #include "breeze.h"
 #include "breezeanimationdata.h"
 #include "breezemetrics.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 #include "config-breeze.h"
 
 #include <KConfigWatcher>

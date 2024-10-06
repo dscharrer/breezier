@@ -6,7 +6,7 @@ include_directories(${CMAKE_BINARY_DIR}/libbreezecommon)
 
 ################# newt target #################
 ### plugin classes
-set(breezedecoration_SRCS
+set(breezierdecoration_SRCS
     breezebutton.cpp
     breezedecoration.cpp
     breezesettingsprovider.cpp
@@ -14,16 +14,16 @@ set(breezedecoration_SRCS
 )
 
 ### build library
-kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
-add_library(breezedecoration MODULE
-    ${breezedecoration_SRCS}
-    ${breezedecoration_config_PART_FORMS_HEADERS})
+kconfig_add_kcfg_files(breezierdecoration_SRCS breeziersettings.kcfgc)
+add_library(breezierdecoration MODULE
+    ${breezierdecoration_SRCS}
+    ${breezierdecoration_config_PART_FORMS_HEADERS})
 
-set_target_properties(breezedecoration PROPERTIES
-    OUTPUT_NAME org.kde.breeze
+set_target_properties(breezierdecoration PROPERTIES
+    OUTPUT_NAME org.kde.breezier
 )
 
-target_link_libraries(breezedecoration
+target_link_libraries(breezierdecoration
     PRIVATE
         breezecommon6
         Qt6::DBus
@@ -35,7 +35,7 @@ target_link_libraries(breezedecoration
         KDecoration2::KDecoration
 )
 
-install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
+install(TARGETS breezierdecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
 
 add_subdirectory(config)
 

@@ -11,7 +11,7 @@
 
 #include "breeze.h"
 #include "breezelistmodel.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 
 namespace Breeze
 {

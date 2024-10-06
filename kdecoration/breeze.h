@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "breezesettings.h"
+#include "breeziersettings.h"
 
 #include <QList>
 #include <QSharedPointer>

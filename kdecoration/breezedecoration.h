@@ -8,7 +8,7 @@
 #pragma once
 
 #include "breeze.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 
 #include <KDecoration2/DecoratedClient>
 #include <KDecoration2/Decoration>

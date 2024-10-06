@@ -8,7 +8,7 @@
 
 #include "breeze.h"
 #include "breezedecoration.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 
 #include <KSharedConfig>
 

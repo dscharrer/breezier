@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Description": "Window decoration using the Breezier visual style for the Plasma Desktop",
+        "EnabledByDefault": true,
+        "Name": "Breezier"
+    },
+    "X-KDE-ConfigModule": "kcm_breezierdecoration",
+    "org.kde.kdecoration2": {
+        "blur": false,
+        "recommendedBorderSize": "None"
+    }
+}

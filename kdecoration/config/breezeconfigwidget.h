@@ -11,7 +11,7 @@
 
 #include "breeze.h"
 #include "breezeexceptionlistwidget.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 #include "ui_breezeconfigurationui.h"
 
 #include <KCModule>

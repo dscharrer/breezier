@@ -11,7 +11,7 @@
 #pragma once
 
 #include "breeze.h"
-#include "breezesettings.h"
+#include "breeziersettings.h"
 
 #include <KSharedConfig>
 
