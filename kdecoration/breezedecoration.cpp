@@ -149,7 +149,6 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     , m_shadowAnimation(new QVariantAnimation(this))
 {
     g_sDecoCount++;
-    setDecorationName("breeze");
 }
 
 //________________________________________________________________
