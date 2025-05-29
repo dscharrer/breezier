@@ -32,7 +32,7 @@ target_link_libraries(breezierdecoration
         KF6::GuiAddons
         KF6::I18n
         KF6::IconThemes
-        KDecoration2::KDecoration
+        KDecoration3::KDecoration
 )
 
 install(TARGETS breezierdecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})

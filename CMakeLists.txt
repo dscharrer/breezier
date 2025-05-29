@@ -89,7 +89,7 @@ function(build_Qt6)
 
     add_subdirectory(libbreezecommon libbreezecommon6)
 
-    find_package(KDecoration2 REQUIRED)
+    find_package(KDecoration3 REQUIRED)
     add_subdirectory(kdecoration)
 
     unset(QUERY_EXECUTABLE CACHE)
